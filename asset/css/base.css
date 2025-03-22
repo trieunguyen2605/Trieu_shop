@@ -8,12 +8,15 @@
     --primary-color:#ec482c;
     --border-color:#eeeded;
     /* chiều cao của phần navbar */
-    --navbar-height:25px;
+    --navbar-height:31px;
     /* chiều cao của phần header  */
     --header-height:120px;
     /* làm như này sau này khi tăng kích thước của header-height thì height của search cũng vừa khít phần còn lại */
     --header-with-search-height:calc(var(--header-height) - var(--navbar-height));
     --header-sort-bar-height:46px;
+}
+.clear{
+  clear: both;
 }
 *{
     box-sizing: inherit;

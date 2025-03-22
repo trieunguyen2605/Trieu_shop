@@ -217,6 +217,7 @@ font-weight: 550;
 }
 
 .header__navbar-icon{
+    /* height: var(--navbar-height); */
     font-size: 1.6rem;
     margin: 0px 4px;
 }
