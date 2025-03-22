@@ -1,0 +1,327 @@
+:root{
+    --white-color:#fff;
+    --black-color:#000;
+    --text-color:#333;
+    /* vì rating có thể sẽ xuất hiện nhiều chỗ  */
+    --start-gold-color:#FFCE3E;
+    /* primary: căn nguyên ,căn bản,nguyên nhân đầu  */
+    --primary-color:#ec482c;
+    --border-color:#eeeded;
+    /* chiều cao của phần navbar */
+    --navbar-height:25px;
+    /* chiều cao của phần header  */
+    --header-height:120px;
+    /* làm như này sau này khi tăng kích thước của header-height thì height của search cũng vừa khít phần còn lại */
+    --header-with-search-height:calc(var(--header-height) - var(--navbar-height));
+    --header-sort-bar-height:46px;
+}
+*{
+    box-sizing: inherit;
+}
+html{
+    /* thường thì 100%=16px */
+    /* 62.5%=10px =>1rem=10px,12px=1.2rem */
+    font-size: 62.5%;
+    /* line-height là dùng để tăng chiều cao của dòng */
+    line-height: 1.6rem;
+    box-sizing: border-box;
+    /* tạo font  */
+    .roboto-light {
+      font-family: "Roboto", serif;
+      font-weight: 300;
+      font-style: normal;
+    }
+    
+    .roboto-regular {
+      font-family: "Roboto", serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+    
+    .roboto-medium {
+      font-family: "Roboto", serif;
+      font-weight: 500;
+      font-style: normal;
+    }
+    
+    .roboto-bold {
+      font-family: "Roboto", serif;
+      font-weight: 700;
+      font-style: normal;
+    }
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* responsive  */
+
+/* những thẻ nằm trong class này sẽ nằm trên cùng một hàng ngang  */
+.grid__row{
+  display: flex;
+  flex-wrap: wrap;
+  /* -5 tức là nó sẽ dịch sang trái 5px thay vì thường nó dịch sang phải 5px
+  theo khuyến cáo thì trên pc thường khoảng cách giữa các cột là 12px ,tức là thay đổi cả cái bên dưới   */
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+/* test */
+.grid__column-2{
+  /* tổng hai cái trên pc thường là 24px  */
+  /* thường sẽ là 12px theo khuyến cáo trên pc nhưng do nhiều sản phẩm nên ta cho =5px
+  mỗi cái 5px thì các sản phẩm cách nhau 10px  */
+    padding-left: 5px;
+    padding-right: 5px;
+    /* 16.6667% vì lấy 100/12 là ra được một cột nhưng ở đây ta lấy hai nên nhân hai ra 16.6667% */
+    width: 16.6667%;
+}
+
+
+.grid__column-10{
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 83.3333%;
+}
+
+/* grid__column-2-4 vì có 12 cột và có 5 sản phẩm thì ta lấy 12/5 =2.4  */
+.grid__column-2-4{
+    padding-left: 5px;
+    padding-right: 5px;
+    /* width:20% vì có 5 sản phẩm thì ta lấy 100%/5=20% ; */
+    width: 20%;
+}
+
+/* animation */
+/* animation dành cho nối cầucầu */
+@keyframes fadein{
+  from{
+          opacity:0;
+  }
+  to{
+          opacity:1;
+  }
+}
+/*di chuyển lớn lên*/
+@keyframes growth{
+  from{
+          transform:scale(var(--growth-from));
+  }
+  to{
+          transform: scale(var(--growth-to));
+  }
+}
+
+/* modal */
+.modal{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /* display:flex để hỗ trợ margin:auto; ở modal__body*/
+  display: flex;
+  animation: fadein ease-in 0.2s;
+}
+
+.modal__overlay{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* màu đen là ba con 0 */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* z-index: 3; */
+  /* dùng để thay đổi hiệu ứng cho nền màu đen có thể viết ở đây nhưng nó chỉ thay đổi mỗi nền đen khi xuất hiện 
+  có thể viết lên trên .modal thì nó sẽ hiện cả .modal__body là 
+  cái bảng màu trắng ấy  */
+  /* animation: fadein ease-in 0.3s; */
+}
+
+.modal__body{
+  /* di chuyển từ 70% đến kích thước nguyên vẹn 1  */
+  --growth-from:0.7;
+  --growth-to:1;
+  /* trong thực tế thì không cần width và height vì khi viết vào nó cũng sẽ tạo dần ra thôi  */
+  /* width: 300px;
+  height: 300px; */
+  margin: auto;
+  /* position:relative dùng để cho nó nổi lên trên 
+    vì overlay cũng có position vì thế nó nổi lên trên
+    vì vậy mà cần thêm position vào modal__body để nó 
+    viết sau thì nó nổi lên trên;
+    nhưng mà nói chung nên dùng z-index để nổi nên và mặc định là z-index:0; */
+  /* position: relative; */
+  z-index: 1;
+  /* không viết background-color ở đây vì nó sẽ cứng không áp dụng cho sau này mà ta nên viết vào .auth-form vì nó cũng chứa tất cả mà */
+  /* background-color:white ; */
+  border-radius: 5px;
+  /* di chuyển to dần lên */
+  animation: growth linear 0.2s;
+}
+
+/* button style */
+.btn{
+  /* đặt min-width vì nếu không sau này chữ dài ra sẽ bị lỗi */
+    min-width: 124px;
+    height: 34px;
+    /* text-decoration:none để sau này có dùng lại mà nó là thẻ a thì bỏ dấu gạch chân; */
+    text-decoration: none;
+    border-radius: 3px;
+    border: none;
+    font-size: 1.4rem;
+    /* padding này cho nút trở lạ và đăng ký vì tý nút kia có cái mới đè vào nên cái này tuy cùng class nhưng do đè nên không áp dụng cho cái kia */
+    padding: 3px 12px 0 12px ;
+    /* khi ấn vào có outline ,nhưng của mình ấn vào không có outline */
+    outline: none;
+    cursor: pointer;
+    color: var(--text-color);
+    /* color: red;màu color trên áp dụng cho cả hai trở lại và đăng ký,nhưng vì đăng ký ở dưới có nên ở đây chỉ áp dụng cho mỗi trở lại */
+    /* để chỉnh fb và chữ thẳng ra ô giữa  */
+    /* inline-flex để sau này dùng nhiều nút thì nó dàn hàng ngang luôn áp dụng trong .grid__column-10 ,yên tâm là bây h sửa nó không ảnh hưởng đến những cái trước */
+    display:inline-flex;
+    justify-content: center;
+    align-items: center;
+    /* line-height dùng để chỉnh chữ đăng nhập btn ra giữa hàng dọcdọc ra giữa */
+    line-height: 1.4rem;
+}
+/* có thể thay bằng .auth-form__controls-back:hover nhưng nên dùn cách mà sau này có thể tận dụng lại */
+.btn.btn--normal:hover{
+  background-color:rgba(126, 124, 124, 0.2) ;
+}
+/* có hai class có lẽ vì chỉ áp dụng cho ai có hai classclassclass*/
+.btn.btn--size-s{
+  height: 30px;
+  /* padding này cho nút facebook và google */
+  padding: 0 8px;
+  font-size: 12px;
+} 
+/*dưới đây là áp dụng cho có một class nếu có thì độ ưu tiên sẽ cho cái nào có hai classclass
+  .btn--size-s{
+  color: blue;
+} */
+/* viết liền là css cho ai có cả hai class ,nó khác với .btn .btn-primary */
+.btn.btn--primary{
+  color: var(--white-color);
+  background-color: var(--primary-color);
+}
+/* sẽ có khi nút bị vô hiệu hóa,dùng khi nút cần vô hiệu hóa ,cursor là hình mũi tên*/
+.btn.btn--disabled{
+    cursor: default;
+    color: #e2dddd;
+    /* filter:brightness(80%) là giảm đi độ sáng đi 80%; */
+    /* filter: brightness(80%);*/
+    background-color: #b5b1b1;
+}
+
+/* select */
+.select-input{
+    /* height thì cho bằng với .btn  */
+    position: relative;
+    height: 34px;
+    min-width: 200px;
+    padding: 0 12px ;
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* font-size thì phải css cho trong label  */
+    /* font-size: 1.4rem; */
+    background-color: var(--white-color);
+}
+
+.select-input__label{
+  font-size: 1.4rem;
+}
+
+.select-input__icon{
+  font-size: 1.3rem;
+  color: rgb(131,131,131);
+}
+
+/* phần hiện ra của select,chính là giá và mũi tên  */
+.select-input__list{
+  position: absolute;
+  list-style: none;
+  /*ta không cần đặt chiều width vì nó bằng với chiều rộng thì ta chỉ cần ghi right :0; left:0 ; */
+  left: 0;
+  right: 0;
+  top: 25px;
+  background-color: var(--white-color);
+  border-radius: 2px;
+  /* do là thẻ ul nên có padding-left:0; vì khi hover vào chữ thì nó không đổi màu background nên ta có thể đặt padding vào thẻ ul luôn cho nhanh  */
+  padding: 8px 16px;
+  display: none;
+  animation: fadein 0.1s linear;
+  z-index: 1;
+}
+
+.select-input:hover .select-input__list{
+  display: block;
+}
+
+
+
+.select-input__items{
+  
+}
+
+
+.select-input__link{
+  text-decoration: none;
+  font-size: 1.3rem;
+  color: var(--text-color);
+  /* display:block để nó có thể sử dụng padding; */
+  display: block;
+  padding: 5px 0;
+  /* có thể cho transition vào cũng được */
+  /* transition: color 0.1s linear; */
+}
+
+.select-input__link:hover{
+  color: var(--primary-color);
+}
+
+/* pagination phần phân trang  */
+.pagination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    padding-left: 0;
+  }
+  
+.pagination-item{
+  margin: 0 16px ;
+}
+
+/* khi cps .pagination-item--active thì nó sẽ có background-color:cam */
+.pagination-item--active .pagination-item__link{
+  color: var(--white-color);
+  background-color: var(--primary-color);
+}
+
+.pagination-item--active .pagination-item__link:hover{
+    background-color: #ed5c3f;
+}
+
+.pagination-item__link{
+  /* thêm --height để sau này chỉ cần sửa --height thì nó vẫn căn ra giũa theo chiều dọc  */
+  --height:30px;
+  text-decoration: none;
+  font-size: 1.8rem;
+  color: #939393;
+  /* viết min-width và height ở đây mà không phải ở 
+  pagination-item vì sau này ấn thì sẽ ấn vào thẻ a to luôn chứ nếu không viết ở đây thì sau này ấn vào khu vực quanh thẻ a thì mới vào link mặc dù nhìn thấy nút to  */
+  /* viết min-width vì số sau này sẽ còn dài ra nữa  */
+  /* phải thêm display:block vào thẻ a thì mới phát huy width và height  */
+  text-align: center;
+  /* viết line-height vào để chiều dọc nó căn ra chính giữa  */
+  display: block;
+  height: var(--height);
+  line-height: var(--height);
+  min-width: 40px;
+  border-radius: 2px;
+  font-weight: 300;
+}
+
+.pagination-item__icon{
+
+}

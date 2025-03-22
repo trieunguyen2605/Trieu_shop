@@ -1,0 +1,1790 @@
+.app{
+    /* để nó không bị hở khoảng trắng ở rìa mép*/
+    overflow: hidden;
+}
+
+.header{
+    height: var(--header-height);
+    /* 0 là góc độ */
+    background-image: linear-gradient(0,#ff6431,#f63f2c);
+}
+
+.header__navbar{
+    /* đưa ul  lên cùng một hàng  */
+    display: flex;
+    /* dùng để cách xa nhau ra  */
+    justify-content: space-between;
+}
+
+.header__navbar-list{
+    /* list-style dùng để bỏ dấu tròn của list  */
+    list-style: none;
+    /* padding để không cách bên trái một khoảng 40px do lập trình sẵn  */
+    padding-left: 0px;
+    margin: 4px 0 4px 0 ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* phần hiện lên của đăng nhập,tài khoản của tôi,địa chỉ của tôi... */
+.header__navbar-user{
+    display: flex;
+    align-items: center;
+}
+
+.header__navbar-user-img{
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+
+.header__navbar-user:hover .header__navbar-user-menu{
+    display: block;
+}
+.header__navbar-user-name{
+    font-size: 1.6rem;
+    color: var(--white-color);
+    font-weight: 300;
+    position: relative;
+    top: -3px;
+}
+
+.header__navbar-user .header__navbar-user-name:hover{
+    color: rgb(241, 241, 241);
+}
+.header__navbar-user-menu{
+    position: absolute;
+    /* ul có mặc định padding-left:40px nên ta bỏ  */
+    padding-left:0px;
+    width: 160px;
+    list-style: none;
+    top: calc(100% + 4px);
+    right: 0;
+    background-color: var(--white-color);
+    border-radius: 2px;
+    z-index: 1;
+    box-shadow: 0 0 2px #e1e1e1;
+    display: none;
+    animation: fadein 0.1s ease-in-out;
+}
+
+.header__navbar-user-item{
+            
+}
+
+.header__navbar-user-item-separate{
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+/* tạo mũi tên  */
+.header__navbar-user-menu::after{
+    position: absolute;
+    content: "";
+    display: block;
+    border-style: solid;
+    border-width: 8px 10px;
+    border-color:transparent transparent  var(--white-color) transparent;
+    top: -15px;
+    right: 34px;
+}
+.header__navbar-user-item a{
+    /* phải thêm block vào vì thẻ a không có tính chất block vì thế ,à không padding được  */
+    display: block;
+    text-decoration: none;
+    padding: 8px 16px;
+    color: var(--text-color);
+}
+/* tạo cầu */
+.header__navbar-user-menu::before{
+    position: absolute;
+    content: "";
+    display: block;
+    /* background-color: red; */
+    width: 100%;
+    height: 12px;
+    top: -12px;
+    /* right: ; */
+}
+
+.header__navbar-user-item a:first-child{
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+}
+
+.header__navbar-user-item a:last-child{
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+/* hover vào thẻ a vì dù sao nó có chiều rộng kế thừa chiếm hết rồi nhờ block */
+.header__navbar-user-item a:hover{
+    background-color:#fafafa ;
+}
+.header__navbar-item{
+    /* margin: 0px 8px ;dùng để cách các li ra  */
+    margin: 0px 8px;
+    position: relative;
+    /* min-height dùng để tý nữa chỉnh li và facebook ra chính 
+    giữa mà không bị lệch 1px */
+    min-height: 16px;
+}   
+
+.header__navbar-item--has-qr:hover .header__qr{
+    /* dùng cho nối cầu */
+    /* hàm này được hiểu là khi hover cho class kia thì sẽ áp dụng cho .header__qr
+    display:block là dùng để hiện lại mã qr ,cứ khác none là hiện lại; */
+    display:block;
+}
+
+.header__navbar-item--has-notify:hover .header__notify{
+    display: block;
+}
+.header__navbar-item,
+.header__navbar-item-link{
+    /* dùng cho chữ */
+    /* display:inline-clock dùng để đưa li lên cùng một dòng ; */
+    /* display: inline-block; 
+    code dưới đây dùng để css cho chữ ,bell và trợ giúpgiúp*/
+    font-size: 1.4rem;
+    color: var(--white-color);
+    font-weight: 300;
+}
+
+/* dưới đây là để căn giữa facebook và thẻ li( vì thẻ 
+facebook nằm trong thẻ a nên khi viết thì viết cả thẻ a
+dưới đây là cho cả bell chứ nếu mỗi facebook thì chỉ cần hai dòng 1 và 33) */
+.header__navbar-item,
+.header__navbar-item-link,
+.header__navbar-icon-link{
+    /* dùng inline-flex để nó vẫn ở trên hàng 
+    và căn chỉnh fb và intar sao cho thẳng nhau và thẳng với li 
+
+    nếu đúng ra thì ghép item vs item-link <chỉnh li và bell >và
+    ghép item vs icon-link tách riêng ra */
+    /* nếu chỉ chỉnh mỗi navbar-item thì nó chỉ chỉnh li vs thẻ a mà không chỉnh bell do bell nằm trong thẻ aa */
+    display: inline-flex;
+    align-items: center;
+}
+
+.header__navbar-item:hover,
+.header__navbar-item-link:hover,
+.header__navbar-icon-link:hover{ 
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
+}
+
+.header__navbar-icon-link{
+    color: var(--white-color);
+    /* xóa đi gạch chân của thẻ aa */
+    text-decoration: none;
+}
+
+.header__navbar-icon-link:nth-child(2){
+    /* nếu là first thì thẻ span trước nó mới là first child ,còn tại sao nth-child lại là số hai nhỉ mà span không cùng class */
+    /* margin để facebook cách sang trái 4px
+    fix cứng như này vì chắc chắn rằng sau này chỉ sửa icon đứng sau chữ kết nối vì nó là nth:child(2) mà   */
+    margin-left: 4px;
+}
+.header__navbar-item-link{
+    /* text-decoration:none dùng để bỏ dấu gạch dưới của thẻ a ; */
+    text-decoration: none;
+}
+
+.header__navbar-item{
+    display: inline-block;
+}
+
+.header__navbar-item--strong{
+font-weight: 550;
+}
+.header__navbar-item--separate::after{
+    content: "";
+    display: block;
+    position: absolute;
+    /* dưới đây là dùng border-left:1px solid #ffeeec dùng để tạo gạch dọc ; */
+    /* có thể dùng width nhunguw phải dùng cả background-color */
+    border-right: 1px solid #ffeeec;
+    /* height là chiều cao  */
+    height: 12px;
+    /* background-color: #ffeeec; */
+    top:50%;
+    right:-8px;
+    /* translateY(-50%) dịch lên trên 6px  50% ở đây là 50% phần trăm của chính nó là
+    6px vì 12/2
+    hoặc là chỉnh top sao cho vừa là được nhưng dùng cách kia sẽ tiện khi ta thay đổi chiều cao của thẻ li  */
+    transform: translateY(-50%);
+}
+
+.header__navbar-icon{
+    font-size: 1.6rem;
+    margin: 0px 4px;
+}
+
+.header__navbar-no--no-pointer{
+cursor: text;
+color: var(--white-color);
+}
+
+
+
+/* Header qr code tạo bảng mã code*/
+.header__qr{
+    background-color: var(--white-color);
+    width: 150px;
+    position: absolute;
+    left: 0px;
+    /*
+    +,để 134% vì muốn mép trên bằng với mép từ mã đến li
+    +,để % tốt vì sau này khi tăng chiều cao của thẻ li thì 
+    nó sẽ dich xuống 134% */
+    top: 134%;
+    padding:8px;
+    border-radius: 2px;
+    /* display:none; là dùng để ẩn nó đi ,muốn hiện thì chỉ cần 
+    ghi khác none chứ không phải cứ block là hiện */
+    display: none;
+    /* animation dành cho cầu nối */
+    animation:fadein linear 0.1s;
+    z-index: 1;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+/* cầu nối giữa qr và li*/
+.header__qr::before{
+    display: block;
+    content: "";
+    position: absolute;
+    /* để width 100% để bằng chiều ngang của cha nó là header__qrqr */
+    width: 100%;
+    height: 20px;
+    /* background-color: red; muốn xem thấy cầu thì mở màu để xem nó như thể nàonào */
+    left: 0px;
+    top: -10px;
+
+}
+.header__qr-img{
+    /* width:100%;dùng để qr nằm hẳn bên trong header__qr */
+width: 100%;
+}
+
+.header__qr-apps{
+    /*đưa google và app store lên cùng một hàng  */
+    display: flex;
+    /*cho hai cái store và google play cách ra hai bên của header__qrqr  */
+    justify-content: space-between;
+    /* margin-top: 0px; */
+}
+/* có thể dùng :first-child để thay thế cho nth-child() */
+.header__qr-link:nth-child(1){
+    /* dùng để google play thẳng hàng với mã qr */
+    margin-left: 9px;
+}
+
+.header__qr-link:nth-child(2){
+    /* dùng để store thẳng hàng với mã qr */
+    margin-right: 8px;
+}
+
+.header__qr-download-img{
+    /* đây là chiều cao của store và google play  */
+    height: 12px;
+}
+
+
+
+
+/* header notification :phầ phần hiện ra của thông báo thông báo */
+.header__notify{
+    position: absolute;
+    /* 134% vì lần trước cũng để cách 134% ở ul 1 thôithôi */
+    top: 134%;
+    width: 400px;
+    right: 0;
+    display: block;
+    border: 1px solid #d4d4d4;
+    /* không cần chiều dọc vì khi content rộng ra tự khắc sẽ có chiều dọc  */
+    background-color: var(--white-color);
+    /* cursor:default để chỗ header của thông báo không có trỏ chuột
+    ,chỗ sản phẩm vẫn có trỏ chuột vì nó là thẻ a mà;*/
+    cursor: default;
+    animation:headerNotifyGrowth ease-in 0.2s;
+    border-radius: 2px;
+    /*có những thuộc tính css cần thêm prefix 
+    không phải trình duyệt nào cũng support cho animation này thế nên ta phải viết rõ ra 
+    -webkit-animation:headerNotifyGrowth ease-in 0.2s;
+    -ms-animation:headerNotifyGrowth ease-in 0.2s; là dành cho microsoft
+    -o-animation:headerNotifyGrowth ease-in 0.2s;
+    -moz-animation:headerNotifyGrowth ease-in 0.2s;
+    .....
+    vậy làm thế nào để không biết hỗ trợ
+    ta tìm caniuse rồi gõ animation màu xanh là hỗ trợ
+    */
+    /*  trình duyệt web sẽ tối ưu cho opacity và transform hơn, cho trình duyệt biết cái nào sẽ thay đổi là opacity và transformtransform*/
+    will-change: opacity ,transform;
+    /* scale:to dần lên  */
+    /* định tâm của transform là scale ấy ,90% là bắt đầu từ trái sang phải lấy 90%*/
+    transform-origin: calc(100% - 32px) top;
+    display: none;
+    z-index: 1;
+}
+
+/* tạo mũi tên cho thông báobáo */
+.header__notify::before{
+    position: absolute;
+    content: "";
+    /* border-width:20px 30px là dùng để nó tõe đầu tam giác ra ,hình chữ nhật ; */
+    border-width: 20px 27px;
+    border-style: solid;
+    border-color: transparent transparent var(--white-color) transparent;
+    right: 0px;
+    top: -28px;
+}
+
+/* tạo cầu nối cho thông báo  */
+.header__notify::after{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 80px;
+    height: 18px;
+    right: 0px;
+    top: -15px;
+    /* background-color: red; */
+}
+/* growth là: sự lớn lên */
+@keyframes headerNotifyGrowth{
+    from{
+        opacity: 0;
+        transform: scale(0);
+    }
+    to{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+/* shift alt +sang phải */
+.header__notify-header{
+    height: 40px;
+    background-color: var(--white-color);
+}
+.header__notify-header h3{
+    color: #9a9797;
+    /* do mặc định h3 đã có margin padding nên mình cho no bằng 0 để nó dính sắt lên trên */
+    margin: 0px 0px 0px 12px;
+    padding: 0px;
+    font-size: 1.4rem;
+    font-weight: 400;
+    /* line-height 40px vì để nó ở giữa thì cho chiều cao bằng chính thằng chứa nó  là class header__notify-header */
+    line-height: 40px;
+     /* cursor:text con chuột sẽ bị thay đổi thành hình chữ I, là chỗ đó có thể kiểu sao chep được ,hãy bật nó và thử để biết;  */
+    /* cursor: text; */
+    /* user-select:none là dùng để không sao chép; */
+    user-select: none;
+    /* -webkit-user-select: none dành cho chrom khi nó không nhận user-selectselect khi mà nó không nhận user-select:none do nó không được hỗ trợ;; */
+}
+.header__notify-list{
+    /* padding-lefteft:0px vì mặc định thẻ ul ở đây 40px và nó cách ảnh ra xấu ; */
+    padding-left: 0;
+}
+.header__notify-item{
+    /* có lẽ thừa  */
+    display: flex;
+
+}
+
+.header__notify-item:hover{
+    background-color: #ededed;
+}
+
+/* đã xem ,chỉ đặt ở thẻ li vì nó bao trùm cả thẻ a */
+.header__notify-item--viewed{
+    background-color: rgba(236,72, 44,0.2);
+}
+
+.header__notify-link{
+    /* display ở đây dùng để đưa ảnh img và class header__notify-link lên cùng một hàng  */
+    display: flex;
+    /* width:100% vì thẻ li hay thẻ a chưa chứa hết khung header__notify ,nhưng bài mình làm đã chứa hết nên chắc không cần; */
+    width: 100%;
+    /* viết padding vì để cách ra thôi */
+    padding: 12px;
+    text-decoration: none;  
+    /* có thể viết rgba ở .header__notify-list hoặc thẻ a vì nó bao quát hết tất cả  */   
+}
+.header__notify-img{
+    width: 30px;
+    /* object-fit:center dùng để không bị méo ảnh ; */
+    object-fit: contain;
+    margin-right: 8px;
+}
+.header__notify-info{
+
+}
+.header__notify-name{
+/* khi viết vào trong thẻ span thì nó không có tính chất khối vì vậy hai thẻ span cạnh nhau sẽ bị nhảy lên một dòng */
+/* viết span thì thêm display :block hoặc không thì viết vào 
+thẻ khác ví dụ thẻ p; */
+display: block;
+font-size: 1.4rem;
+color: var(--text-color);
+font-weight: 400;
+/* line-height :1.6rem để khi viết dài quá xuống dòng thì nó không dính sát vào nhau ; */
+line-height: 1.8rem;
+}
+.header__notify-descriotion{
+    display: block;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    color: #a9a9a9;
+    margin-top: 4px;
+}
+.header__notify-footer{
+    /* display:flex để tý căn giữa chữ; */
+    display: flex;
+    /* text-align: center; */
+}
+.header__notify-footer-btn{
+    text-decoration:none;
+    color: var(--text-color);
+    /* căn chỉnh chữ ra giữa  */
+    /* cách 1 viết display:flex; ở header__notify-footer rồi viết margin:auto  ở dưới ,có thể để padding:4px 16px để chiều ngang rộng ra ;,đây gọi là căn chỉnh element trong một element khác có display :flex;
+       cách 2 viết display:flex; ở header__notify-footer rồi viết width:100%; và text-align:center ở dưới ;; */
+    /* cách 3 không viết display:flex ở header__notify-footer rồi viết width:100%; và text-align:center ở dưới và viết display:block; vì thẻ a không có thuộc tính bằng block ;;  */
+    /* cách 1 */
+    /* margin:auto;
+        width:60px; miễn sao width không chiếm 100% vì thể thì margin sẽ không căn chỉnh được */
+    /* cách 2 */
+    width: 100%;
+    /* để width:100% vì muốn ấn chỗ nào cũng được; */
+    text-align: center;
+    padding: 8px 00px;    
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+
+
+
+/* auth modal:là phần body của modal */
+/* .modal .modal__overlay và .modal__body viết ở file base để sau này có gì dùng  */
+.auth-form{
+    /* có thể viết width ở file .modal__body */
+    background-color: var(--white-color);
+    width: 500px;
+    border-radius: 5px;
+    /* khi con vượt qua cha thì hidden là ẩn con thừa đi   */
+    overflow: hidden;
+}
+
+.auth-form__container{
+    padding: 0 32px;
+}
+
+.auth-form__header{
+    /* dùng để căn cho chữ đăng ký và đăng nhập thẳng hàng  */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding:0 12px;
+}
+
+.auth-form__heading{
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.auth-form__switch-btn{
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.auth-form__form{
+
+}
+
+.auth-form__input{
+    height: 40px;
+    /* 100% để ô viết kéo dài hết  */
+    width: 100%;
+    /* margin-top:16px; là để tiện thể cách trên chứ nếu
+     không bình thường viết margin-top 16px ở auth-form__form rồi xuống đây viết margin-bottom: 16px; */
+    margin-top: 16px;
+    /* padding ở đây tác động đến chữ bên trong input */
+    padding: 0 12px;
+    font-size: 1.4rem;
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
+    /* outline là khi ta ấn chuột để ghi thì sẽ có outline xuất hiện và ta muốn bỏ nó đi  */
+    outline: none;
+}
+
+/* khi chuột vào trong input và border đổi màu để nhập thì hành động này được gọi là focus nghĩa là tập trung */
+.auth-form__input:focus{
+    border-color: #888;
+}
+
+.auth-form__aside{
+    margin-top: 17px;
+}
+
+.auth-form__policy-text{
+    font-size: 1.3rem;
+    line-height: 1.8rem;
+    /* text-align dùng để căn chữ ra giữa dòng đó  */
+    text-align: center;
+    padding: 0px 12px;
+}
+.auth-form__text-link{
+    color: var(--primary-color);
+    text-decoration: none;   
+}
+
+/* nút ấn trở lại và đăng ký */
+.auth-form__controls{
+    display: flex;
+    margin-top: 80px;
+    /* điều chỉnh justify k viết ở file base vì base là chung cho sau này  */
+    justify-content: flex-end;
+}
+/* hai nút trở lại và đăng ký sẽ viết vào file base vì nó là dùng chung cho sau này nữa  */
+
+.auth-form__controls-back{
+    margin-right: 8px;
+}
+.auth-form__socials{
+    padding: 13px 32px;
+    background-color: #F5F5F5F5;
+    display: flex;
+    /* margin để nó cách với class container  */
+    margin-top: 34px;
+    justify-content: space-between;
+    padding: 16px;
+    /* border-radius: 5px; */
+    
+}
+/* kích cỡ của icon */
+.auth-form__socials-icon{
+    font-size: 1.8rem;
+}
+.auth-form__socials--fb{
+    color:var(--white-color);
+    background-color: #0865fe;
+    margin-left: 18px;
+}
+/* viết như ở dưới là có cách nếu viết liền
+xét hai cái vì nếu chỉ có mỗi icon thì tí ở google cũng có mà cái này chỉ áp dụng cho fb */
+.auth-form__socials--fb 
+.auth-form__socials-icon{
+    color: var(--white-color);
+    /* background-color: red; */
+}
+.auth-form__socials-title{
+    margin:28px;
+}
+
+.auth-form__socials--google{
+    color: #666;
+    background-color: var(--white-color);
+}
+
+
+
+/* phần đăng nhập */
+.auth-form__help{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.auth-form__help-link{
+    color: var(--text-color);
+    font-size: 1.4rem;
+    text-decoration: none;
+    /* color dưới đây là cho cả hai nhưng do cái quên mật khẩu được xét lại nên màu đỏ kia sẽ đè lên màu này */
+    color: #939393;
+}
+ /* tạo vạch ngăn cách ,tiện thể cách hai chữ ra luôn bằng margin là được */
+.auth-form__help-separate{
+    border-right: 1px solid #EAEAEA;
+    display: block;
+    height: 19px;
+    /* margin dùng để cách hai chữ kia ra 
+    muốn nó di chuyển lên trên thì chỉ cần thêm margin top là được */
+    margin: 0 12px 4px;
+    /* margin-bottom: 4px; */
+}
+
+.auth-form__help-forgot{
+    color: var(--primary-color);
+}
+
+
+
+/* header-with-search */
+.header-with-search{
+    height: var(--header-with-search-height);
+    /* dùng display flex để ba logo,search,cart cái lên cùng một hàng */
+    display: flex;
+    align-items: center;
+    /* margin ở đây để img shoppee thẳng hàng với chữ của nav */
+    margin: 0 8px;
+}
+
+.header__mobile-search{
+    padding: 0 12px;
+    display: none;
+}
+
+.header__mobile-search-icon{
+    font-size: 2.6rem;
+    color: var(--white-color);
+}
+
+.header__logo{
+    width: 200px;
+}
+
+.header__logo-link{
+    /* không ảnh hưởng màu logo chúng ta tránh trường hợp nó yaoj ra một cái border màu xanh xanh   */
+    color: transparent;
+    /* để tránh sau này có các logo có gạch dưới  */
+    text-decoration: none;
+    display: block;
+    line-height: 0;
+}
+
+.header__search-checkbox:checked ~ .header__search{
+    /* vì ban đầu .header__search là flex nên ta phải cho về flex nếu không vỡ giao diện  */
+    display: flex;
+}
+.header__logo-img{
+    width: 150px;
+    /* không thể xét màu trong này ,nó sẽ không đổi mày vì nó file là svg */
+}
+
+.header__search{
+    background-color: var(--white-color);
+    /* flex 1 để nó tự chiếm hết phần còn lại vì chiều ngang của hai cái kia cố định rồi */
+    flex: 1;
+    height: 40px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+}
+
+
+/* link giỏ hàng  */
+.header__cart{
+    width: 130px;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    text-align: center;
+    /* position: relative; không cần vì .header__cart-wrap mới chứa phần hiện của giỏ hàng*/
+}
+
+.header__cart-wrap{
+    position: relative;
+    /* display :block là có sẵn xho thẻ div nó sẽ chiếm hết chiều ngang mà ta chỉ muốn nó không chiếm chiếm hết chiều ngang do kế thừa thì ta dùng inline-block; */
+    display: inline-block;
+    padding: 0 8px;
+    cursor: pointer;
+    /* right để hình giỏ hàng nó dịch sang trái 16px */
+    right: 16px;
+    -webkit-tap-highlight-color: transparent;
+}
+.header__cart-icon{
+    color: var(--white-color);
+    font-size: 2.0rem;
+    /* margin để di chuyển icon cách trên một khoảng 3px */
+    margin-top: 3px;
+}
+
+/* phần hiện ra của giỏ hàng  */
+/* hạn chế css vỏ ngoài vì có hai chế độ 1 là chưa có sản phẩm 2 là có sản phẩm nếu css quá nhiều vào vỏ nó sẽ ảnh hưởng đến nhau vì thể nên hạn chế  */
+.header__cart-list{
+    position: absolute;
+    top: calc(100% + 11px);
+    right:-5px;
+    background-color: var(--white-color);
+    width: 380px;
+    border-radius: 2px;
+    /* display: flex; */
+    box-shadow: 0 2px 10px rgba(0,0 ,0,0.1 );
+    display: none;
+    animation: fadein 0.1s linear;
+    /* cursor:default để khi di chuột vào thì nó hình mũi tên ,nếu không có thì nó hình bàn tay do đang ở trong .header__cart-wrap có pointer ; */
+    cursor: default;
+    z-index: 1;
+}
+.header__cart-list--no-cart{
+    /* phải viết ở class này nếu không sau này có sản phẩm là nó sẽ khác  */
+    padding: 24px 0 ;
+}
+
+/* dùng đê hiện ra khi cho class header__cart-list--no-cart vào  */
+.header__cart-list--no-cart .header__cart-no-cart-img,
+.header__cart-list--no-cart .header__cart-list-no-cart-msg{
+    /* margin để không bị ghi đề margin-top,bottom của chúng element  */
+    margin-left:auto; 
+    margin-right: auto;
+    /* display dùng để hiện ra khi cho class kia vào */
+    display: block;
+}
+/* dùng để hiện lên  */
+.header__cart-wrap:hover .header__cart-list{
+    display:block;
+}
+
+/* tạo mũi tên cho phần giơ hàng  */
+.header__cart-list::after{
+    position:absolute;
+    content: "";
+    /* trong các trường hợp này thường thì không cần display:block */
+    right: 4px;
+    top: -30px;
+    border-width: 20px 20px;
+    border-style: solid;
+    border-color: transparent transparent var(--white-color) transparent;
+    /* cursor:pointer vì nó đang là cursor:default do ở trong .header__cart-list ,nó đang đè lên giỏ hàng khiến giỏ hàng cũng hình cursor:default;;; */
+    cursor: pointer;
+}
+
+/* notice là để ý  */
+.header__cart-notice{
+    position: absolute;
+    padding: 1px 6px 0  ;
+    top: -4px;
+    right: -6px;
+    background-color: var(--white-color);
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    border-radius: 8px;
+    border: 1px solid #EE4D2D;
+    color: var(--text-color);
+}
+/* 1 tiếp  */
+.header__search-input-wrap{
+    position: relative;
+    /* class này dùng để sau này còn chứa cả thẻ input và phần hiện ra của input   */
+    flex: 1;
+    /* height:100% dùng để chữ thẳng hàng với cả ô ở đây có height và chiều rộng chính là flex 1 */
+    height: 100%;
+}
+
+.header__search-input{
+    /* width: 100%; không cần width chỉ cần flex 1 là nó sẽ tự chiếm phần còn lại */
+    height: 100%;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    font-size: 1.5rem;
+    /* màu cho chữ */
+    color: var(--text-color);
+    /* padding cho chữ  */
+    padding: 0 16px;
+    width: 100%;
+    /* user không có tác dụng trong trường hợp này */
+    /* user-select: none; dùng để không sao chép văn bản */
+}
+
+.header__search-select{
+    /* border-left để làm ngăn cách  */
+    border-left: 1px #c3c0c0 solid;
+    padding-left: 16px;
+    position: relative;
+    cursor: pointer;
+}
+
+.header__search-select-label{
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+/* ấn vào trong shop thì hiện mục Trong shop và Ngoài shop */
+.header__search-select:hover .header__search-option{
+    display: block;
+}
+.header__search-select-icon{
+    font-size: 1.1rem;
+    color: #4A4A4A;
+    margin:  0 16px 0 8px ;
+    /* muốn chỉnh cho icon xuống lên mà không dùng được margin thì dùng relative rồi dùng top nhưng mà ở đây của mình hợp rồi nên mình cho bằng 0 viết đoạn này thừa chứ nếu cần thì dùng   */
+    position: relative;
+    top: 0px;
+}
+
+.header__search-btn{
+    background-color: var(--primary-color);
+    border: none;
+    /* vì chiều cao của header__select là 40px và ta muốn nó cao gần bằng header__select nên ta đặt nó bằng 26px */
+    height: 34px;
+    width: 50px;        
+    border-radius: 2px;
+    margin-right: 3px;
+    /* của thầy ấn vào button có outline sao của mình lại không có  */
+    outline: none;
+    cursor: pointer;
+}
+
+.header__search-btn:hover{
+    background-color: #ef6348;
+}
+
+.header__search-btn-icon{
+    font-size: 1.4rem;
+    color: var(--white-color);
+}
+
+/* phần hiện ra của trong shop  */
+.header__search-option{
+    position: absolute;
+    right: 0;
+    top: calc(130%);
+    width: 128px;
+    list-style: none;
+    box-shadow: 0 1px 1px #c6c4c4;
+    /* padding left vì ul nó có mặc định là 40px nên càn xóa đi  */
+    padding-left: 0;
+    border-radius: 2px;
+    /* overflow: hidden; không dùng ở đây
+    được vì nó sẽ ảnh hưởng đến cầu nối giữa
+    trong shop và block trong shop */
+    /* vì không dùng được overflow nên phải border -radius cho first-child và last-child cho li  */
+    display: none;
+    animation: fadein 0.2s linear;
+    /* khi thu nhỏ màn hình lại ta sẽ thấy phần này nằm dưới phần hiện ra của giá  */
+    z-index: 1;
+}
+/* tạo cầu nối cho phần .header__search-select  */
+.header__search-option::after{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    top: -16px;
+    /* background-color: red; */
+}
+
+.header__search-option-item{
+    background-color: var(--white-color);
+    padding: 8px 8px;
+    /* text-align:right để đưa chữ sang phải ; */
+    /* text-align: right; */
+    cursor: pointer;
+}
+/* dùng để border-radius cả ô lại  */
+.header__search-option-item:first-child{
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+}
+
+.header__search-option-item:last-child{
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.header__search-option-item:hover{
+    background-color: #fafafa;
+}
+
+.header__search-option-item span{
+    font-size: 1.4rem;
+    color: var(--text-color);
+    /* dùng để cách chữ ra khỏi icon tích  */
+    margin-left: 8px;
+}
+
+.header__search-option-item i{
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-left: 12px;
+    display: none;
+}
+
+/* khi có class này thì sẽ có dấu tích màu đỏ */
+.header__search-option-item-active i{
+    /* phải dùng inline-block nếu không nó sẽ bị nhảy xuống dòng  */
+    display: inline-block;
+}
+
+
+
+/* search history phần hiện lên của lịch sử */
+.header__search-history{
+    position: absolute;
+    /* top ở đây cần viết như vậy vì sau này khi thay đổi chiều của input thì ta sẽ phải sửa vì ta đang fix cứng nó   */
+    top: calc(100% + 2.5px);
+    left: 0;
+    width: calc(100% - 16px);
+    background-color: var(--white-color);
+    border-radius: 2px;
+    box-shadow: 0 0 5px #cecdcd;
+    /* display:none để  tý nữa nó hiện nên; */
+    display: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* dùng để css cho header__search-history khi kia focus */
+.header__search-input:focus~.header__search-history{
+    display: block;
+}
+/* đây là cách hai không áp dụng overflow , vẫn áp dụng được overflow  vì đây là áp dụng focus chứ không phải là hover  */
+/* .header__search-history-item:last-child{ */
+/* ,class này dùng để tạo bỏder-radius vì khi hover vào item thì nó có background và nó sẽ che đi border-radius của cha  */
+/* border-bottom-right-radius: 2px;
+border-bottom-left-radius: 2px;
+} */
+
+.header__search-history-heading{
+    /* dùng margin vì h3 đang có khoảng margin mặc đinh nên ta dùng margin đè nó luôn  */
+    margin: 8px 12px ;
+    font-size: 1.4rem;
+    color: #999;
+    font-weight: 400;
+    
+}
+
+.header__search-history-list{
+    /* padding:0 vì thẻ ul có khoảng padding left mặc định  */
+    padding-left:0 ;
+    list-style: none;
+    /* margin-bottom:0 vì thẻ ul có một khoảng margin-bottom,top mặc định  */
+    margin:6px 0 0;
+}
+
+.header__search-history-item{
+    /* height :38px vì nhìn thấy nó cao bằng với thẻ input nên ta cho gần bằng với thẻ input */
+    height: 38px;
+    padding: 0 12px;    
+}
+.header__search-history-item a{
+    text-decoration: none;
+    font-size: 1.4rem;
+    line-height: 38px;
+    color: var(--text-color);
+    /* display block dùng để khi di chuột vào item thì nó vẫn có chuột hình bàn tay 
+    tác dụng của display block là để cho chiều rộng của thẻ a dài ra thì ấn vào ra hình bàn tay 
+    có thể là inline-block nhưng vì bản chất nó là hai hàng khác nhau rồi nên không cần inline-block 
+    +,vì thẻ a không có display :block nên nó nhỏ nhỏ vì thể cho thêm display block để nó rộng ra  */
+    display: block;
+}
+
+.header__search-history-item:hover{
+    background-color: rgb(246, 246, 246);
+}
+
+/* muốn select cho những thẻ ul đứng sau thẻ p này thì ta dùng dấu ngã p~ul ,trong trường hợp nay thẻ ul đứng sau thẻ input  */
+/* select những thẻ input để css cho ul thì: */
+
+/* phần hiện ra không có sản phẩm*/
+.header__cart-no-cart-img{
+    width: 100%;
+    display: none;
+}
+
+.header__cart-list-no-cart-msg{
+    /* text-align dùng để chỉnh chữ ra giữa dòng  */
+    text-align: center;
+    display: none;
+    /* display: block; */
+    font-size: 1.4rem;
+    color: #888;
+    /* để di chuyển chữ xuống dưới  */
+    margin-top: 6px;
+}
+
+/* phần giỏ hàng có sản phẩm  */
+.header__cart-heading{
+    /* text-align:left để nó nhảy sang trái; */
+    text-align: left;
+    margin: 8px 0 8px 12px;
+    font-size: 1.4rem;
+    color: #999;
+    font-weight: 400;
+}
+
+.header__cart-list-item{
+    /* vì thẻ ul có padding left 40 */
+    padding-left: 0;
+    list-style: none;
+    max-height: 50vh;
+    overflow: auto;
+}
+
+.header__cart-item{
+    display: flex;
+    align-items: center;
+}
+
+.header__cart-item:hover{
+    background-color: #f8f8f9;
+}
+.header__cart-img{
+    border: 1px solid #f8f8f0;
+    width: 42px;
+    height: 42px;
+    margin: 12px;
+}
+
+.header__cart-item-info{
+    width: 100%;
+    margin-right: 12px;
+}
+
+.header__cart-item-head{
+    /* thêm 100% mà vẫn chưa space-between là do head đang nằm trong info mà info chưa 100% nên phải chuyển 100% lên info để dùng space-between */
+    /* width: 100%; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* nếu có width:100% thì sẽ không dùng được margin-right; */
+}
+
+.header__cart-item-name{
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--text-color);
+    /* margin:0 vì thẻ h có margin mặc định còn thẻ ul có padding left mặc định; */
+    margin: 0;
+    padding-bottom: 5px;
+    line-height: 1.4rem;
+    /* max-height mà không phải height vì nếu để height thì 
+    những sản phẩm có một dòng se không cách xa phần body do height để cố định  */
+    max-height: 2.8rem;
+    overflow: hidden;
+    /* vì header__cart-item-head chứa tên và giá  và nó đang dùng 
+    display:flex nên tên và giá trở thành flex item => tên và giá 
+    tự động bị ảnh hưởng flex box ,tức là khi tên dài ra thì giá 
+    sẽ bị co lại và rụng xuống chữ x2 ==>để fix kại thù ta cho 
+    vào thẻ h5 flex:1; ==> fix được hai vấn đề là chữ bị căn ra 
+    giữa và chữ x2 của giá bị rụng xuống */
+    flex: 1;
+    /* padding-right:10px để khi chữ dài quá thì cũng không chạm vào phần giá  */
+    padding-right: 10px;
+    /* tạo dấu ... của phần giỏ hàng sản phẩm  */
+    /* display :block phải viết trước display:-webkit-box */
+    display: block;
+    display: -webkit-box;
+    /* -webkit-box-orient:vertical để xét theo hàng dọc  */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    /* những tên ngắn bị căn ra giữa thì ta dùng text align ở đây lun */
+    text-align: left;
+}
+
+.header__cart-item-price-wrap{
+    padding-bottom: 6px;
+}
+
+.header__cart-item-price{
+    font-size: 1.4rem;
+    font-weight: 400;
+    color:var(--primary-color);
+}
+
+.header__cart-item-multiply{
+    font-size: 1.2rem;
+    color: #757575;
+    margin:0 4px;
+}
+
+.header__cart-item-quantity{
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #757575;    
+}
+
+.header__cart-item-body{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__cart-item-description{
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: #757575;
+}
+
+.header__cart-item-remove{
+    font-weight: 300;
+    color: var(--text-color);
+    font-size: 1.4rem;
+    /* có thể cho cursor bằng vào hover  */
+    cursor: pointer;
+}
+
+.header__cart-item-remove:hover{
+    color: var(--primary-color);
+}
+
+.header__cart-view-cart{
+    /* float là dùng để một cái sang một hướng nhất định  */
+    float: right;
+    margin: 0px 12px 12px 0;
+}
+
+.header__cart-view-cart:hover{
+    background-color: #F05D41;
+}
+
+.header__sort-bar{
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    left: 0;   
+    height: var(--header-sort-bar-height);
+    background-color: var(--white-color);
+    display: flex;
+    list-style: none;
+    margin-top: 0;
+    padding-left: 0;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    display: none;
+}
+
+.header__sort-item{
+    /* flex 1 như này thì bốn cái tự chia đều ra luôn  */
+    flex: 1;
+}
+
+.header__sort-link{
+    text-decoration: none;
+    color:var(--text-color);
+    font-size: 1.4rem;
+    /* display: block để nó chiếm hết chiều ngang của thẻ li  */
+    display: block;
+    line-height: var(--header-sort-bar-height);
+    text-align: center;
+    position: relative;
+}
+
+/* tạo ngăn cách  */
+.header__sort-link::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    height: 60%;
+    border: 1px solid #e5e5e5;
+}
+
+.header__sort-item:first-child .header__sort-link::before{
+    display: none;
+}
+/* phải cho thêm class link vì nó chứa chứ ,nếu mỗi active thì k được vì nó k chứa chữ  */
+.header__sort-item--active .header__sort-link{
+    color: var(--primary-color);
+}
+
+
+/* css cho app container  */
+.app__container{
+    background-color: #F5F5F5;
+}
+
+.app__content{
+    padding-top: 34px;
+}
+.category{
+    border-radius: 2px;
+    background-color: var(--white-color);
+}
+
+.category__heading{
+    color: var(--text-color);
+    /* font-size này sẽ chỉnh cho cả chữ và icon nhưng icon được xét riêng nên không áp dụng vào icon  */
+    font-size:1.5rem ;
+    margin-top: 0;
+    padding: 16px 16px 0 16px;
+    /* user-select: none; */
+    /* margin-bottom: 0; */
+    /* text-transform:uppercase dùng để viết hoa chữ cái thôi */
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.category-list{
+    /* padding-left:0; do thẻ ul có padding mặc định 
+    8px để nó cách bên dưới 8px  */
+    padding: 0 0 8px 0;
+    list-style: none;
+    /* margin-left để danh mục và cái mũi tên thẳng hàng nhau  */
+}
+
+.category-item{
+    position: relative;
+}
+
+.category-item::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 20px;
+    right: 20px;
+    border-top: 1px solid #e1e1e1;
+    /* width: 100%; không cần vì có left cà right thì nó d=sẽ tự có  */
+}
+
+.category-item:first-child::before{
+    display: none;
+}
+
+/* phải thêm hai class vì active đang ở li thì nó tác dụng cho li chứ không tác dụng cho chữ bên trong thẻ a của nó  */
+.category-item--active .category-item__link{
+    color: var(--primary-color);
+}
+
+.category-item__link{
+    position: relative;
+    font-size: 1.6rem;
+    color: var(--text-color);
+    text-decoration: none;
+    /* 16px vì để cho thẳng hàng với category__heading có thẻ h3 thì ta cho một khoảng padding bằng category bằng padding của category__heading  */
+    padding: 6px 20px;
+    /* thẻ a phải thêm block nếu không thì không padding được */
+    display: block;
+}
+
+.category-item__link:hover{
+    color: var(--primary-color);
+    /* background-color: #f8f8f8; */
+}
+
+
+/* MObile Category */
+.mobile-category{
+    display: none;
+}
+
+.mobile-category__list{
+    display: flex;
+    padding-left: 0;
+    max-width: 100%;
+    /*  khi thẻ con vượt quá thẻ cha theo chiều x (ngang) thì auto 
+    tức là sẽ tạo ra thẻ kéo trượt cho mình ,khác hidden là ẩn hẳn  */
+    overflow-x: auto;
+}
+
+/*dùng để ẩn thanh trượt đi do */
+.mobile-category__list::-webkit-scrollbar{
+    display: none;
+}
+
+.mobile-category__item{
+    list-style: none;
+    /* khi thẻ cha bị co lại thì item con sẽ không bị co theo thẻ cha  */
+    flex-shrink:0 ;
+    margin-right: 10px;
+}
+
+.mobile-category__item:nth-of-type(3n) .mobile-category__link{
+    background-color: #87AFD8;
+}
+
+.mobile-category__item:nth-of-type(3n + 1) .mobile-category__link{
+    background-color: #76C9BD;
+}
+
+.mobile-category__item:nth-of-type(3n + 2) .mobile-category__link{
+    background-color: #88CF81;
+}
+.mobile-category__link{
+    --line-height:2rem;
+    text-decoration: none;
+    color: var(--white-color);
+    font-size: 1.4rem;
+    line-height:var(--line-height);
+    /* khi ấn vào các item không bị bôi đen chữ nữa
+    không để uẻ-select chữ trên mobile nữa  */
+    user-select: none;
+    -webkit-user-select: none;
+
+    text-align: center;
+    font-weight: 200;
+    padding: 0 5px;
+    width: 110px;
+    height: calc(var(--line-height) * 2);
+    overflow: hidden;
+    display: block;
+    border-radius: 5px;
+    /* tạo dấu ba chấm cần có overflow height gấp đôi line-height   */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    /* khi ấn vào các nút trên mobile thường có hightline nên ta xóa ,các bút khác đang bị nữa  */
+    -webkit-tap-highlight-color: transparent;
+}
+/* home sort + filter ,có lẽ là 10 cột còn lại*/
+.grid__column-10{
+
+}
+
+.home-filter{
+    display: flex;
+    align-items: center;
+    padding: 12px 22px;
+    border-radius: 2px;
+    background-color: rgba(0,0,0,0.04);
+}
+
+.home-filter__label{
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #555;
+    margin-right: 16px;
+}
+
+.home-filter__btn{
+    /* ngày trước có min min-width:120px ở .btn thì bây giờ không được sửa ở .btn vì nó ở file base sẽ làm thay đổi nhiều thứ ,hãy css trong đây .home-filter__btn */
+    min-width: 90px;
+    margin-right: 12px;
+    background-color: #ffffff;
+    /* padding-top:1px để nó chữ thẳng ra giữa ; */
+    padding-top: 1px;
+}
+
+.home-filter__page{
+    display: flex;
+    align-items: center;
+    /* margin-left:0 sẽ cho nó nhảy sang tít phải luôn ; */
+    margin-left: auto;
+    /* font-size: 1.4rem; không hiểu sao nếu đặt ở đây nhìn chữ sẽ to hơn */
+}
+
+.home-filter__page-num{
+    font-size: 1.4rem;
+    color: var(--text-color);
+    margin-right: 22px;
+}
+
+.home-filter__page-num-current{
+    color: var(--primary-color);
+}
+
+.home-filter__page-controls{
+    border-radius: 2px;
+    overflow: hidden;
+    /* dùng như  này thì khi nó flex:1; thì nó sẽ thự đọng lấy 72 để chia đôi ra cho hai thằng flex :1 ; */
+    /* display :flex để đưa lên cùng một dòng ; */
+    display: flex;
+    width: 72px;
+    height: 36px;
+}
+
+.home-filter__page-btn{
+    flex: 1;
+    /* display: inline-block; */
+    /* display:flex được dùng để kích hoạt flex:1;; */
+    display:flex;
+    background-color: var(--white-color);
+    text-decoration: none;
+}
+
+.home-filter__page-icon{
+    /* margin:auto để nó tự động cho icon ra giữa; */
+    margin: auto;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.home-filter__page-btn:first-child{
+    border-right: 1px solid #eee;
+}
+
+.home-filter__page-btn--disabled{
+    background-color: #f9f9f9;
+    cursor: default;
+}
+/* khi không dùng đến nút đó thì ta sẽ dùng tới cái này  */
+.home-filter__page-btn--disabled .home-filter__page-icon{
+    color: #ccc;
+}
+
+/* product item :css cho phần sản phẩm  */
+/* code dưới đây để toàn cái chứa sp sẽ cách cuối cùng 10px  */
+.home-product{
+    margin-bottom: 10px;
+}
+.home-product-item{
+    position: relative;
+    background-color: var(--white-color);
+    /* margin-top:10px để cách lên trên 10px ; */
+    margin-top: 10px;
+    /* để cho dản phẩm có hai vị trí border  */
+    border-radius: 2px;
+    box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1);
+    transition: transform ease-in 0.05s;
+    will-change: transform;
+    /* thêm display:block để nó là thẻ a có tính chất block
+    nếu không có thì tý nữa nó sẽ thay đổi vị trí cảu thẻ giảm và thẻ yêu thích  */
+    display: block;
+    text-decoration: none;
+}
+
+.home-product-item:hover{
+    box-shadow: 0 1px 20px 0px rgba(0,0,0,0.05);
+    transform: translateY(-1px);
+}
+
+.home-product-item__img{
+    /* khi dùng padding trong background-img thì nó chình là chiều ngang của thẻ chứa nó  */
+    padding-top: 100%;
+    /* dùng trong trường hợp ảnh nhỏ hơn ,nó sẽ bị lặp lại nhiều lần vì thế cần no-repeat */
+    /* background-repeat: no-repeat; */
+    /* khi ảnh nhỏ hơn thì ta dùng contain để nó tràn ra cho đủ ảnh kể cả ảnh quá lớn chỉ nhìn được một góc nhỏ thì dùng contain cũng giải quyết được
+    khi ảnh dài quá chiều ngang hoặc dọc dài quá và ta dùng cover thì nó sẽ khác  */
+    background-size: contain;
+    /* khi dùng cover và muốn ảnh hiện ở trọng tâm thì ta dùng background-position */
+    /* vì ảnh sẽ bị hở lên trên 1px khiến cho không thể border nên ta dùng top center ,lúc này nó sẽ hở xuống dưới nhưng bên dưới khó nhìn nên vẫn ổn 
+    chứ thật ra phải xử lý ảnh */
+    background-position: top center;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+.home-product-item__name{
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--text-color);
+    line-height: 1.8rem;
+    /* vì thẻ h3 có margin-top,bottom mặc định nên ta dùng margin 
+    tiện thể ta cho hai bên cách ra thêm 10px nên ta dùng cùng vs 
+    margin luôn cho đỡ phải thêm padding   */
+    /* padding:0 10px ; */
+    /* trên ,trái phải,dưới */
+    margin:10px 10px 6px;
+    /* 3.6rem để giới hạn nó trong hai dòng để tý làm dấu ... */
+    height: 3.6rem;
+    /* overflow để những phần tử con chòi ra ngoài sẽ mất để tý nữa làm dấu ... */
+    overflow: hidden;
+
+    /* nhưng webkit-box chỉ chạy trên những bowder có core là webkit
+    =>thêm display :block khi cái dưới không chạy thì trình duyệt sẽ 
+    chạy display :blo;;  */
+    display: block;
+    display: -webkit-box;
+    /* -webkit-box-orient: hướng mà dòng chữ của chúng ta trong trường hợp này , hướng box của chúng ta theo chiều nào 
+    vertical dòng mottoj ở trên .dòng hai ở dưới tức là chiều dọc :vertical; */
+    -webkit-box-orient:vertical ;
+    /* -webkit-line-clamp dùng để tác động đến dòng nào => bước này say ra được dấu...  */
+    -webkit-line-clamp:2 ;
+    /* do trình duyệt từ edge17 ,firefox 68,sẩi 5, chrom 6,opera 15 là hỗ chợ nên ta phải thêm vài thuộc tính vào để cho nó có mottoj số trình duyệt chạy được  */
+    /* text-overflow:ellipsis; tạo ra dấu ... trong một dòng thôi  
+    để nhìn rõ text-overflow  thì ta coment lại ba dòng 87 90 92 
+    và cho height:1.8;và ta thêm white-space:nowrap để nó không xuống dòng khi đó chữ sẽ chọc ra và do có text-over-flow:ellipsis chặn lại 
+    không dùng cách này khi ta có nhiều dòng ;;*/
+
+    /* cách hai tạo dấu ba chấm */
+    /* height:1.8rem chỉ cho cao bằng một dòng  */
+    /* white-space: nowrap; */
+    /* text-overflow: ellipsis; khi chữ vượt quá ô thì tạo ra kiểu j ,ellipsis là tạo ra dấu ba chấm  */
+}
+.home-product-item__price{
+    display: flex;
+    /* margin-left :10px để cho bằng với cái chữ bên trên ; */
+    /* margin-left: 10px; */
+    /* xóa margin vì khi số quá dài nó nhảy xuống thì giá current sẽ không thẳng với old  nên ta margin-left vào old và current margin-left 10px cho cách đều nhau và cả khi xuống dòng cũng cách đều nhau  */
+    /* baseline là lấy từ dưới chân dòng  */
+    /* align-items: baseline; vì nó không thẳng hàng từ dưới lên nên ta dùng nó baseline 
+    dùng flex-wrap khi current dài quá và nó xuống dòng  */
+    flex-wrap: wrap;
+}
+.home-product-item__price-old{
+    margin-left: 10px;
+    font-size: 1.4rem;
+    color: #666;
+    /* text-decoration:line-through để nó gạch ngang chữ; */
+    text-decoration:line-through;
+}
+.home-product-item__price-current{
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    /* margin-left để nó cách giá cũ ra  */
+    margin-left: 10px;
+}
+.home-product-item__action{
+    /* 8px để cho khoảng cách của giá cũ mới cách trên dưới
+    đều nhau sẽ css trong .item_name và action ,name thì margin-bottom 6px còn action margin-top:6px;*/
+    margin: 6px 10px 0 ;
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+.home-product-item__like{
+    /* font-size cho hai icon */
+    font-size: 1.3rem;
+}
+
+.home-product-item__like--liked{
+    
+}
+
+/* class dưới đây [hải dùng thêm i cho mạnh nếu có mỗi class kia
+    thì sẽ không được vì nó không dược ưu tiên hơn ,vì thư viện đang
+  có display:inline-block và nó được ưu tiên hơn ; */
+    /* dùng để ẩn tim fill đi  */
+i.home-product-item__like-icon-fill{
+    color: #F63D30;
+    display: none;
+}
+
+/* khi có class liked thì sẽ hiện cái đã like lên */
+.home-product-item__like--liked .home-product-item__like-icon-fill{
+    /* phải là inline-block nếu không tý nó nhảy xuống dòng   */
+    display: inline-block;
+}
+
+/* khi class liked thì sẽ ẩn cái chưa like đi  */
+.home-product-item__like--liked .home-product-item__like-icon-empty{
+    display: none;
+}
+.home-product-item__rating{
+    font-size: 0.6rem;
+    /* zoom: 0.1rem; thu nhỏ nhưng có lẽ trong trường hợp này thu nhỏ không được không có tác dụng */
+    transform: scale(0.8);
+    /* transform-origin để tâm thay đổi ở bên phải mà không phải ở bên giữa nữa */
+    /* nếu không có thì khi thu nhỏ nó sẽ cách phải một khoảng so bị thu nhỏ ở giữa  */
+    /* transform-origin dùng cho transform */
+    transform-origin: right;
+    color: #D5D5D5;
+    /* margin-left:auto để tý nó tự cách sang trái luôn mà không cần một thẻ div to; */
+    margin-left: auto;
+    /* tiện thể đẩy cả chữ 88 đã bán  */
+    /* margin-top:4px dùng để di chuyển 5 hình ngôi sao lên trên một chút 
+    có thể dùng position:relative rồi top:4px nhưng nếu dùng cách này sẽ phải dùng hai dòng 
+    vì thế ta dùng margin-top để đẩy nó lên (của thầy thì đẩy lên trên cảu mình là đẩy xuống dưới ;*/
+    margin-top: 3px;
+    /* có thể viết gộp lại margin:4px 0 0 auto; */
+}
+
+.home-product-item__start--gold{
+    color: var(--start-gold-color);
+}
+
+.home-product-item__sold{
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-left: 6px;
+}
+
+.home-product-item__origin{
+    /* display :flex để nó đưa lên trên ; */
+    display: flex;
+    /* có thể dùng margin-right:auto ở .home-product-item__band để
+     cho hai cái sang hai bên không nhất thiết phải dùng justify-content:space-between;; */
+    /* justify-content: space-between; */
+    /* margin-top:4px; để cho các khoảng bằng nhau  */
+    margin: 4px 10px 0;
+    color: #595959;
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+.home-product-item__brand{
+    /* margin-right:auto sẽ đẩy chữ Nhật bản san hẳn bên trái
+    có thể viết margin-left:auto ở .home-product-item__origin-name hiệu quả tương tự; ; */
+    margin-right: auto;
+}
+.home-product-item__origin-name{
+    
+}
+.home-product-item__favourite{
+    position: absolute;
+    top: 10px;
+    left: -4px;
+    color: var(--primary-color);
+    /* currentColor là một keyword của css nó sẽ ăn theo màu của khối này <tứ là color> 
+    bây h mà đổi màu color thì nó cũng sẽ đổi theo do current*/
+    background-color: currentColor;
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.6rem;
+    padding-right: 4px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+/* không cần đặt class vào icon vì chắc chắn sau này chỉ có những thành phần như này thôi */
+.home-product-item__favourite i{
+    color: var(--white-color);
+    font-size: 0.9rem;
+    margin: 0 2px 0 4px;
+}
+
+.home-product-item__favourite span{
+    /* để màu trắng như này vì cần sử dụng cái color cho phần .home-product-item__favourte */
+    color: var(--white-color);
+}
+
+/* tạo mũi tên trỏ xuống của phần Yêu thích  */
+.home-product-item__favourite::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 100%;
+    /* after là con của .home-product-item__favourite nên sử dụng 
+    currentColor ở đây cũng sẽ ăn theo màu của color của cha nó  */
+    border-top: 3px solid currentColor;
+    border-left: 3px solid transparent;
+    /* filter:brightness(60%) là giảm độ sáng đi 40% còn 60% so với màu của nó  */
+    filter: brightness(60%);
+}
+
+.home-product-item__sale-off{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color:rgba(255, 216, 64,0.94);
+    width: 40px;
+    height: 36px;
+    /* color: rgba(255,216,64,0.94); */
+    /* cho chữ ra giữa theo dòng thì dùng text-align bằng center */
+    text-align: center;
+    padding-top: 3px;
+    border-top-right-radius: 2px;
+}
+.home-product-item__sale-off-percent{
+    color: #EE4D2D;
+    font-weight: 600;
+    font-size: 1.3rem;
+    /* chỡ này font-size cho bằng với line-height ,thầy cho như vậy vì của thầy line-height cao hơn bình thường mà của mình không bị làm sao cả */
+    line-height: 1.3rem;
+}
+.home-product-item__sale-off-label{
+    font-size: 1.2rem;
+    font-weight:600 ;
+    color: var(--white-color);
+    line-height: 1.4rem;
+    position: relative;
+    top: 2px;
+}
+/* tạo hai mũi tên của phần giảm giá  */
+.home-product-item__sale-off::after{
+    position: absolute;
+    content: "";
+    display: block;
+    /* bottom:-6px để nó di chuyển xuống dưới  */
+    bottom: -6px;
+    /* cho border-width-top:0; vì để tạo tạo ra hai mũi tên dưới thì ta cần bỏ đi border top đi  */
+    border-width: 0 20px 7px;
+    border-style: solid;
+    /* phải có color ở đây thì mới dùng currentColor nếu không là nó không hiện 
+    hoặc là ta có thể cho trực tiếp màu vào chỗ currentColor  */
+    color:rgba(255,216,64,0.94) ;
+    border-color: transparent currentColor transparent currentColor;
+}
+
+.home-product__pagination{
+    margin-top: 48px;
+    margin-bottom: 32px;
+    /* padding-left: 0; */
+}
+
+/* footer */
+.footer{
+    /* tạo một viền border ngăn cách bên trên  */
+    border-top: 4px solid var(--primary-color);
+    /* dùng padding mà không margin vì nếu margin thì thì border không cách ra xa mà đi theo tk footer luôn  */
+    padding-top: 14px;
+}
+
+.footer__heading{
+    font-size: 1.4rem;
+    /* dùng để viết hoa các chữ cái  */
+    text-transform: uppercase;
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.footer-list{
+    padding-left: 0;
+    list-style: none;
+
+}
+
+.footer-item{
+
+}
+
+.footer-item__link{
+    text-decoration:none;
+    color: #888;
+    font-size: 1.2rem;
+    display: flex;
+    padding: 5px 0px;
+    align-items: center;
+}
+
+.footer-item__link:hover{
+    color: var(--primary-color);
+}
+
+.footer-item__icon{
+    font-size: 1.6rem;
+    margin:-1px 6px 0 0 ;
+    /* color riêng ra như này để nó icon có màu khác với chữ  */
+    color: #737373;
+}
+
+.footer__download{
+    display: flex;
+    align-items: center;
+}
+
+.footer__download-qr{
+    width: 60px;
+    height: 60px;
+    /* object-fit: contain; ban đầu dùng nhưng do thêm height nên không dùng nữa 
+    nếu không có height thì border sẽ bị kéo dài do footer__download có display:flex nên tk này là flex item nên nó bị căng chiều cao ra  */
+    /* c1 dùng object-fit */
+    border: 1px solid var(--border-color);
+}
+
+.footer__download-apps{
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+
+.footer__download-apps-img-link{
+    text-decoration: none;
+    /* color vì sẽ có một số trình duyệt có màu xanh xanh */
+    color: transparent;
+}
+
+.footer__download-apps-img{
+    height: 1.8rem;
+
+}
+
+.footer__bottom{
+    background-color: #f5f5f5;
+    padding: 8px 0px;
+    margin-top: 20px;
+}
+
+.footer__text{
+    margin: 0px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.header__sort-bar{
+
+}
+
+.header__sort-item{
+
+}
+
+.header__sort-link{
+
+}
